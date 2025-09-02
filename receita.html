@@ -315,10 +315,36 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<!-- Lib de confete -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const duration = 2000; // 4 segundos
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 6,
+      startVelocity: 30,
+      spread: 360,
+      ticks: 60,
+      origin: {
+        x: Math.random(),
+        y: Math.random() - 0.2
+      }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+});
+</script>
 
 </body>
 
 </html>
+
 
 
