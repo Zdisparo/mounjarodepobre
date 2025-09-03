@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upsell - Reset Hormonal</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fefefe;
+      color: #111;
+      line-height: 1.6;
+    }
+    .alerta {
+      background: red;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 32px;
+      color: #222;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 24px;
+      color: #b30000;
+      margin: 20px 0;
+    }
+    .imagem {
+      margin: 20px 0;
+    }
+    .imagem img {
+      max-width: 100%;
+      border: 4px solid #b30000;
+      border-radius: 8px;
+    }
+    .beneficios {
+      text-align: left;
+      margin: 20px 0;
+      font-size: 18px;
+    }
+    .beneficios li {
+      margin-bottom: 10px;
+    }
+    .preco {
+      font-size: 28px;
+      color: #e60000;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .cta {
+      background: #e60000;
+      color: white;
+      padding: 15px 30px;
+      font-size: 22px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta:hover {
+      background: #b30000;
+    }
+    .timer {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #111;
+      font-weight: bold;
+      background: #ffe6e6;
+      padding: 10px;
+      border: 2px solid #b30000;
+      border-radius: 5px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="alerta">
+    ⚠️ NÃO FECHE ESSA PÁGINA OU PODE HAVER ERROS NA SUA COMPRA ⚠️
+  </div>
+  <div class="container">
+    <h1>Oferta Exclusiva: Reset Hormonal</h1>
+    <h2>Seus hormônios estão te sabotando — resete agora e force seu corpo a queimar gordura até dormindo!.... Natural, prático e saudavél.</h2>
+
+
+    <div class="imagem">
+      <img src="/imgh.png" alt="Imagem Reset Hormonal - Emagreça com Controle">
+    </div>
+
+    <p>
+      Você acabou de garantir o <strong>Monjaro de Pobre</strong> e deu o primeiro passo.  
+      Mas agora, existe um **segredo pouco falado** que pode multiplicar seus resultados:  
+      o controle direto dos <strong>hormônios que te fazem ganhar peso</strong>.
+    </p>
+
+    <ul class="beneficios">
+      <li>✅ Controle da fome e compulsão alimentar</li>
+      <li>✅ Melhora da qualidade do sono e recuperação</li>
+      <li>✅ Equilíbrio hormonal para queimar mais gordura</li>
+      <li>✅ Redução do estresse e da ansiedade</li>
+      <li>✅ Resultados ainda mais rápidos junto com o Monjaro de Pobre</li>
+    </ul>
+
+    <p class="preco">🔥 De <s>R$ 97,00</s> por apenas <span style="color:#111;">R$ 14,90</span> — Só Hoje!</p>
+
+    <a href="https://pay.cakto.com.br/8qfczu9_554648" class="cta">👉 SIM, EU QUERO O RESET HORMONAL!</a>
+
+    <div id="contador" class="timer"></div>
+
+    <br><br>
+    <a href="https://pay.cakto.com.br/8qfczu9_554648" style="color:#777; font-size:14px;">Não, eu quero continuar lutando contra meus hormônios...</a>
+  </div>
+
+  <script>
+    // Timer regressivo de 10 minutos
+    let tempo = 10 * 60; 
+    const contador = document.getElementById("contador");
+
+    function atualizarTimer() {
+      const minutos = Math.floor(tempo / 60);
+      const segundos = tempo % 60;
+      contador.innerHTML = `⏳ Oferta expira em ${minutos}:${segundos < 10 ? "0" : ""}${segundos}`;
+      if (tempo > 0) {
+        tempo--;
+      } else {
+        contador.innerHTML = "⚠️ Oferta expirada!";
+      }
+    }
+
+    setInterval(atualizarTimer, 1000);
+    atualizarTimer();
+  </script>
+</body>
+</html>
 
