@@ -202,8 +202,20 @@
 
   <div class="divider"></div>
 
-  <h1>Seu protocolo foi <span class="green">gerado com sucesso!</span></h1>
-  <p class="sub">Por favor assista o vídeo abaixo para liberar</p>
+  <h1 style="margin:0 0 10px;line-height:1.2;font-weight:800;
+           font-size:clamp(28px, 6vw, 44px);text-align:center;">
+  Seu protocolo foi 
+  <span style="color:#16a34a; font-size:clamp(28px, 6vw, 44px); 
+               font-weight:900; display:inline-block; margin-left:6px;">
+    GERADO COM SUCESSO!
+  </span>
+</h1>
+
+<p style="margin:6px 0 20px; font-size:clamp(15px,2.5vw,18px); 
+          color:#4b5563; text-align:center;">
+  Por favor, assista ao vídeo abaixo para liberar
+</p>
+
 
  
 
@@ -672,7 +684,7 @@ updateCountdown();
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   // ===== Configuração =====
-  const REVEAL_MS = 308000; // ajuste aqui (ex.: 335000 = 5min35s)
+  const REVEAL_MS = 338000; // ajuste aqui (ex.: 335000 = 5min35s)
 
   // Acha o primeiro CTA
   const firstCTA = document.querySelector(".cta");
@@ -780,3 +792,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
