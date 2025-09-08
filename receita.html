@@ -670,57 +670,79 @@ updateCountdown();
 </section>
 
 <script>
-// Gira a setinha quando abre/fecha
-document.querySelectorAll('.faq-item').forEach((el)=>{
-  const chev = el.querySelector('.chev');
-  el.addEventListener('toggle', ()=> {
-    chev.style.transform = el.open ? 'rotate(180deg)' : 'rotate(0deg)';
-  });
-});
-</script>
+document.addEventListener("DOMContentLoaded", function () {
+  // ===== Configuração =====
+  const REVEAL_MS = 308000; // ajuste aqui (ex.: 335000 = 5min35s)
 
+  // Acha o primeiro CTA
+  const firstCTA = document.querySelector(".cta");
+  if (!firstCTA) return;
 
-<!-- Script botão CTA -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var checkPlayer = setInterval(function() {
-      if (window.smartplayer && smartplayer.instances && smartplayer.instances.length > 0) {
-        clearInterval(checkPlayer);
-        var player = smartplayer.instances[0];
-        player.on('end', function() {
-          document.getElementById("ctaBtn").style.display = "inline-block";
-        });
-      }
-    }, 1000);
-  });
-</script>
+  // >>> NOVO: memoriza e esconde o PRÓPRIO primeiro CTA <<<
+  const firstCTAOriginal = window.getComputedStyle(firstCTA).display || 'inline-block';
+  firstCTA.style.display = 'none';
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Seleciona os elementos que queremos esconder
-  var ctas = document.querySelectorAll(".cta");
-  var images = document.querySelectorAll(".image-section");
+  // Cria o wrapper que vai conter "do primeiro CTA até o fim da página"
+  const gate = document.createElement("div");
+  gate.id = "gate";
 
-  // Guardamos o display original
-  var elementsToHide = [];
-  ctas.forEach(el => elementsToHide.push({el: el, originalDisplay: window.getComputedStyle(el).display}));
-  images.forEach(el => elementsToHide.push({el: el, originalDisplay: window.getComputedStyle(el).display}));
-
-  // Esconde tudo inicialmente
-  elementsToHide.forEach(item => item.el.style.display = "none");
-
-  // Mostra os elementos após 5min35s e faz scroll suave para o primeiro botão
-  setTimeout(function() {
-    elementsToHide.forEach(item => item.el.style.display = item.originalDisplay);
-    
-    // Pega o primeiro botão CTA e rola suavemente até ele
-    var firstCTA = document.querySelector(".cta");
-    if (firstCTA) {
-      firstCTA.scrollIntoView({ behavior: "smooth", block: "center" });
+  // Tenta envolver tudo após o primeiro CTA até o final do body
+  try {
+    const range = document.createRange();
+    range.setStartAfter(firstCTA);                 // começa logo DEPOIS do CTA
+    range.setEndAfter(document.body.lastChild);    // vai até o último nó do body
+    range.surroundContents(gate);                  // envolve esse trecho com #gate
+  } catch (e) {
+    // Fallback se surroundContents falhar
+    firstCTA.parentNode.insertBefore(gate, firstCTA.nextSibling);
+    let node = gate.nextSibling;
+    while (node) { const next = node.nextSibling; gate.appendChild(node); node = next; }
+    let anc = gate.parentElement;
+    while (anc && anc !== document.body) {
+      let sib = anc.nextSibling, toMove = [];
+      while (sib) { const next = sib.nextSibling; toMove.push(sib); sib = next; }
+      toMove.forEach(n => gate.appendChild(n));
+      anc = anc.parentElement;
     }
-  }, 10000); // 335.000ms = 5min35s
+  }
+
+  // Esconde tudo do "gate"
+  gate.style.display = "none";
+
+  // Função para liberar
+  let released = false;
+  function releaseAll() {
+    if (released) return;
+    released = true;
+
+    // >>> NOVO: mostra o primeiro CTA novamente <<<
+    firstCTA.style.display = firstCTAOriginal;
+
+    // mostra o restante
+    gate.style.display = "";
+
+    // rola até o primeiro CTA
+    firstCTA.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  // 1) Liberação por TEMPO
+  const timer = setTimeout(releaseAll, REVEAL_MS);
+
+  // 2) Liberação ao FINAL do vídeo Vturb (opcional, mantém junto do tempo)
+  const waitPlayer = setInterval(() => {
+    if (window.smartplayer?.instances?.length) {
+      clearInterval(waitPlayer);
+      const player = smartplayer.instances[0];
+      player.on('end', () => {
+        clearTimeout(timer);    // evita liberar duas vezes
+        releaseAll();
+      });
+    }
+  }, 500);
 });
 </script>
+
+
 
     ...
 </script>
