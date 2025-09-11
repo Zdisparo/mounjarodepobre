@@ -408,5 +408,168 @@
       window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && w.classList.contains('open')) w.classList.remove('open'); });
     })();
   </script>
+
+<script>
+(function(){
+  // ===== CONFIG =====
+  const DELAY_MS = 60 * 60 * 1000; // 1h entre notificações
+  const UPS = [
+    {
+      key:'reset',
+      title:'Aproveite o Reset Hormonal',
+      body:'Evite o rebote e proteja seu resultado. Oferta ativa agora.',
+      icon:'/reset-hormonal.png',
+      url:'https://pay.cakto.com.br/8qfczu9_554648',
+      tag:'notif-reset'
+    },
+    {
+      key:'celulite',
+      title:'Adeus Celulite está com oferta',
+      body:'Pele lisa e firme em semanas. Clique e garanta agora.',
+      icon:'/adeuscelulite.png',
+      url:'https://pay.cakto.com.br/6oc24i9_529609',
+      tag:'notif-celulite'
+    },
+    {
+      key:'vip',
+      title:'Entre no Grupo VIP da Nutri Sara',
+      body:'Protocolos semanais e suporte direto. Vagas via checkout.',
+      icon:'/nutrisara.png',
+      url:'https://pay.cakto.com.br/38xg7rj_562082',
+      tag:'notif-vip'
+    },
+    {
+      key:'articulacoes',
+      title:'Alívio nas Articulações',
+      body:'Movimentos simples pra dor e rigidez. Oferta relâmpago.',
+      icon:'/articulações.png',
+      url:'https://pay.cakto.com.br/3fhdqfn_558877',
+      tag:'notif-art'
+    },
+    {
+      key:'chas',
+      title:'Durma pesado com os 5 Chás Noturnos',
+      body:'Sono profundo e ansiedade no zero. Pegue agora.',
+      icon:'/chasnoturnos.png',
+      url:'https://pay.cakto.com.br/chas-noturnos',
+      tag:'notif-chas'
+    }
+  ];
+
+  // ===== KEYS localStorage =====
+  const IDX_KEY  = 'upsellNotifIndex_v1';
+  const LAST_KEY = 'upsellNotifLastTs_v1';
+
+  // ===== Estado =====
+  let idx  = parseInt(localStorage.getItem(IDX_KEY) || '0', 10);
+  if (isNaN(idx) || idx < 0 || idx >= UPS.length) idx = 0;
+
+  let lastTs = parseInt(localStorage.getItem(LAST_KEY) || '0', 10);
+  if (isNaN(lastTs)) lastTs = 0;
+
+  // ===== Permissão só após gesto do usuário =====
+  function askPermissionOnce(){
+    if (!('Notification' in window)) return cleanupPermissionListeners();
+    if (Notification.permission === 'default'){
+      Notification.requestPermission().finally(cleanupPermissionListeners);
+    } else {
+      cleanupPermissionListeners();
+    }
+  }
+  function cleanupPermissionListeners(){
+    window.removeEventListener('click', askPermissionOnce, captureOpts);
+    window.removeEventListener('touchstart', askPermissionOnce, captureOpts);
+  }
+  const captureOpts = {capture:true, once:true};
+  window.addEventListener('click', askPermissionOnce, captureOpts);
+  window.addEventListener('touchstart', askPermissionOnce, captureOpts);
+
+  // ===== Fallback: piscar título =====
+  let blinkTimer = null;
+  const originalTitle = document.title;
+  function startBlink(msg){
+    if (blinkTimer) return;
+    let toggle = false;
+    blinkTimer = setInterval(()=>{ document.title = toggle ? msg : originalTitle; toggle = !toggle; }, 1200);
+  }
+  function stopBlink(){
+    if (blinkTimer){ clearInterval(blinkTimer); blinkTimer = null; document.title = originalTitle; }
+  }
+  window.addEventListener('focus', stopBlink);
+
+  // ===== Dispara notificação do item atual =====
+  function notifyCurrent(){
+    const it = UPS[idx];
+    // Avança índice pra próxima rodada ANTES (pra evitar duplicar se der erro)
+    idx = (idx + 1) % UPS.length;
+    localStorage.setItem(IDX_KEY, String(idx));
+    localStorage.setItem(LAST_KEY, String(Date.now()));
+
+    if ('Notification' in window && Notification.permission === 'granted'){
+      try{
+        const n = new Notification(it.title, {
+          body: it.body,
+          icon: it.icon,
+          badge: it.icon,
+          tag: it.tag,
+          requireInteraction: true // fica até o usuário fechar
+        });
+        n.onclick = () => {
+          try { window.focus(); } catch(e){}
+          // abre checkout em nova aba
+          window.open(it.url, '_blank', 'noopener');
+          n.close();
+        };
+      }catch(e){
+        // fallback caso a notificação falhe
+        startBlink('🔥 Oferta ativa: ' + it.title);
+      }
+    } else {
+      // sem permissão -> fallback
+      startBlink('🔥 Oferta ativa: ' + it.title);
+    }
+  }
+
+  // ===== Checagem periódica enquanto a aba estiver oculta =====
+  let timer = null;
+  function tick(){
+    // Só roda se a aba estiver oculta/minimizada
+    if (!document.hidden) return;
+    // Se passou 1h desde a última notificação, manda a próxima
+    const now = Date.now();
+    lastTs = parseInt(localStorage.getItem(LAST_KEY) || '0', 10) || 0;
+    if (now - lastTs >= DELAY_MS){
+      notifyCurrent();
+    }
+  }
+
+  function startWatcher(){
+    if (timer) return;
+    // checa a cada 60s (navegadores podem limitar setInterval em abas ocultas; tudo bem)
+    timer = setInterval(tick, 60000);
+  }
+  function stopWatcher(){
+    if (timer){ clearInterval(timer); timer = null; }
+    stopBlink();
+  }
+
+  function handleVisibility(){
+    if (document.hidden){
+      startWatcher();
+    } else {
+      stopWatcher();
+    }
+  }
+  document.addEventListener('visibilitychange', handleVisibility);
+  // inicializa conforme estado atual
+  handleVisibility();
+
+  // Opcional: se quer forçar primeira notificação após 1h desde o carregamento mesmo que a aba já comece oculta
+  // se lastTs for 0, setamos agora como referência
+  if (!lastTs){ localStorage.setItem(LAST_KEY, String(Date.now())); }
+})();
+</script>
+
+  
 </body>
 </html>
