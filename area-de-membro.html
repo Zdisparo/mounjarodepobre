@@ -73,6 +73,7 @@
     .thumb.celulite{background-image:url('/adeuscelulite.png')}
     .thumb.vip{background-image:url('/nutrisara.png')}
     .thumb.art{background-image:url('/articulações.png')}
+    .thumb.chas{background-image:url('/chasnoturnos.png')}
 
     .card-body{padding:12px}
     .title{font-weight:800;margin:0 0 4px 0;font-size:15px}
@@ -194,11 +195,20 @@
             <p class="tagline">Levante sem sofrer. Rotina simples de 5 minutos.</p>
           </div>
         </article>
+
+        <!-- 5 Chás Noturnos -->
+        <article class="card" data-modal="chas">
+          <div class="pill new">Novo</div>
+          <div class="thumb chas"></div>
+          <div class="card-body">
+            <h3 class="title">5 Chás Noturnos</h3>
+            <p class="tagline">Sono profundo, ansiedade no zero, descanso de verdade.</p>
+          </div>
+        </article>
       </div>
     </section>
   </div>
 
-  
   <!-- MODAIS DE UPSELL -->
   <!-- Reset Hormonal -->
   <div class="modal" id="modal-reset" aria-hidden="true">
@@ -292,29 +302,28 @@
     </div>
   </div>
 
-<!-- Alívio nas Articulações -->
-  <div class="modal" id="modal-articulacoes" aria-hidden="true">
+  <!-- 5 Chás Noturnos -->
+  <div class="modal" id="modal-chas" aria-hidden="true">
     <button class="x" data-close>✕</button>
     <div class="box">
       <div class="left">
-        <div class="cover" style="background-image:url('/articulações.png')"></div>
+        <div class="cover" style="background-image:url('/chasnoturnos.png')"></div>
       </div>
       <div class="right">
         <div class="copy">
-          <h3>Guia Alívio nas Articulações</h3>
-          <p>Levante sem sofrer. Movimentos simples e truques naturais para reduzir dor e rigidez.</p>
+          <h3>5 Chás Noturnos</h3>
+          <p>Um blend noturno que desliga a mente, reduz ansiedade e aprofunda o sono para acelerar a recuperação e o emagrecimento.</p>
           <ul class="bullets">
-            <li>✅ 3 exercícios de 5 minutos</li>
-            <li>✅ Compressa morna & chá anti-inflamatório</li>
-            <li>✅ Checklist diário prático</li>
+            <li>✅ Sono profundo e reparador</li>
+            <li>✅ Diminui ansiedade e compulsão noturna</li>
+            <li>✅ Ritual simples de 5 minutos antes de dormir</li>
           </ul>
-          <div class="price">De <s>R$ 29,90</s> por <b style="color:var(--accent)">R$ 9,90</b> — oferta relâmpago.</div>
-          <a class="btn" href="https://pay.cakto.com.br/3fhdqfn_558877" target="_blank" rel="noopener">💥 Adquirir Agora</a>
+          <div class="price">De <s>R$ 19,90</s> por <b style="color:var(--accent)">R$ 9,90</b> — oferta exclusiva.</div>
+          <a class="btn" href="https://pay.cakto.com.br/chas-noturnos" target="_blank" rel="noopener">🌙 Adquirir 5 Chás Noturnos</a>
         </div>
       </div>
     </div>
   </div>
-
 
   <!-- Modal PDF Fullscreen (Mounjaro) -->
   <div class="pdf-modal" id="pdfModal" aria-hidden="true" role="dialog" aria-label="Visualizador de PDF">
@@ -336,7 +345,13 @@
 
   <script>
     // Abrir modal de upsell ao clicar nos cards
-    const map = { reset:'modal-reset', celulite:'modal-celulite', vip:'modal-vip', articulacoes:'modal-articulacoes' };
+    const map = {
+      reset:'modal-reset',
+      celulite:'modal-celulite',
+      vip:'modal-vip',
+      articulacoes:'modal-articulacoes',
+      chas:'modal-chas'
+    };
     document.querySelectorAll('.card').forEach(card=>{
       card.addEventListener('click', ()=>{
         const id = map[card.dataset.modal];
@@ -387,7 +402,6 @@
     (function(){
       const w = document.getElementById('welcome');
       const c = document.getElementById('welcomeClose');
-      // Mostra sempre que carregar (se quiser mostrar uma vez só, salva em localStorage)
       document.addEventListener('DOMContentLoaded', ()=>{ w.classList.add('open'); });
       c.addEventListener('click', ()=> w.classList.remove('open'));
       w.addEventListener('click', (e)=>{ if(e.target===w) w.classList.remove('open'); });
