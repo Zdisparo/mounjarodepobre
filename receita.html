@@ -236,48 +236,6 @@
 <!-- Placeholder para manter espaço -->
 <div id="placeholder" style="height: 60px;"></div>
   
-<!-- === ÁUDIO: "Escute esse áudio" (estilo WhatsApp) === -->
-<div class="audio-wrap" style="max-width:400px;margin:18px auto 10px;text-align:left;">
-  <p style="font-weight:700;margin:0 0 8px;">Escute o áudio da Dra. Sara Fialho</p>
-
-  <div class="audio-card" id="wa-audio"
-       style="display:flex;align-items:center;gap:12px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:14px;padding:12px;">
-    <img src="/profile.png" alt="Foto de perfil" width="44" height="44"
-         style="border-radius:999px;object-fit:cover;flex:0 0 44px;">
-
-    <button type="button" id="wa-play"
-            aria-label="Tocar áudio"
-            style="border:none;background:#10b981;color:#fff;width:44px;height:44px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 0 #0a7c5a;cursor:pointer;">
-      <!-- ícone ► -->
-      <span id="wa-icon" style="font-weight:900;font-size:18px;line-height:1;transform:translateX(1px);">►</span>
-    </button>
-
-    <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
-      <!-- barra de progresso -->
-      <input type="range" id="wa-seek" min="0" value="0" step="0.01"
-             style="width:100%;accent-color:#10b981;">
-
-      <!-- tempo -->
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;">
-        <span id="wa-current">0:00</span>
-        <span id="wa-duration">0:00</span>
-      </div>
-    </div>
-
-    <!-- Áudio real (melhor compatibilidade) -->
-<audio id="wa-audio-el"
-       preload="auto"
-       playsinline
-       crossorigin="anonymous">
-  <!-- MP3 primeiro (mais compatível) -->
-  <source src="/audio1.mp3" type="audio/mpeg">
-  <!-- OGG opcional (alguns navegadores) -->
-  <source src="/audio.ogg" type="audio/ogg">
-  Seu navegador não suporta áudio HTML5.
-</audio>
-
-  </div>
-</div>
 
   <!-- Botão CTA -->
   <a href="https://pay.cakto.com.br/dp27vxm_553165" id="ctaBtn" class="cta">
@@ -295,89 +253,6 @@
 </div>
 
 
-
-<script>
-(function(){
-  const audio   = document.getElementById('wa-audio-el');
-  const playBtn = document.getElementById('wa-play');
-  const icon    = document.getElementById('wa-icon');
-  const seek    = document.getElementById('wa-seek');
-  const cur     = document.getElementById('wa-current');
-  const dur     = document.getElementById('wa-duration');
-
-  const toMMSS = s => {
-    if (!isFinite(s)) return "0:00";
-    const m = Math.floor(s/60);
-    const ss = Math.floor(s%60).toString().padStart(2,'0');
-    return `${m}:${ss}`;
-  };
-
-  // Garantias básicas
-  audio.volume = 1;                 // som máximo
-  audio.muted  = false;             // não mudo
-
-  // Mostrar duração quando carregar
-  const setDuration = () => { 
-    if (audio.duration && isFinite(audio.duration)) {
-      seek.max = audio.duration;
-      dur.textContent = toMMSS(audio.duration);
-    }
-  };
-  audio.addEventListener('loadedmetadata', setDuration);
-  audio.addEventListener('durationchange', setDuration);
-
-  // Play/Pause com tratamento de erro
-  playBtn.addEventListener('click', async () => {
-    try {
-      if (audio.paused) {
-        await audio.play();
-        icon.textContent = '❚❚';
-      } else {
-        audio.pause();
-        icon.textContent = '►';
-      }
-    } catch (e) {
-      console.warn('Falha ao reproduzir:', e);
-      alert('Não consegui tocar o áudio. Verifique se seu dispositivo não está no silencioso e se o arquivo /audio.mp3 existe.');
-    }
-  });
-
-  // Progresso
-  audio.addEventListener('timeupdate', () => {
-    seek.value = audio.currentTime || 0;
-    cur.textContent = toMMSS(audio.currentTime || 0);
-  });
-
-  // Seek manual
-  seek.addEventListener('input', () => { audio.currentTime = seek.value; });
-
-  // Fim do áudio
-  audio.addEventListener('ended', () => { icon.textContent = '►'; });
-
-  // Tratativa de erro de carregamento
-  audio.addEventListener('error', (e) => {
-    const err = audio.error;
-    let msg = 'Erro ao carregar o áudio.';
-    if (err) {
-      const map = {
-        1: 'aborted',
-        2: 'network',
-        3: 'decode',
-        4: 'src not supported'
-      };
-      msg += ` (code ${err.code}: ${map[err.code] || 'desconhecido'})`;
-    }
-    console.warn(msg, e);
-    alert('Não consegui carregar /audio.mp3. Confirme o caminho e o formato (MP3).');
-  });
-
-  // Pausar outros áudios se existirem
-  document.addEventListener('play', function(e){
-    const audios = document.getElementsByTagName('audio');
-    for (let a of audios) if (a !== e.target) a.pause();
-  }, true);
-})();
-</script>
 
 <!-- Bloco de preço alinhado e sem sobreposição -->
 <div style="width:100%;max-width:460px;margin:20px auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;font-family:Inter,Arial,sans-serif;">
@@ -856,5 +731,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
 
 
