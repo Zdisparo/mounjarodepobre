@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎬 Área VIP – Seu Catálogo de Resultados</title>
+  <style>
+    :root{
+      --bg:#0b0b0b; --bg2:#141414; --text:#f1f1f1; --muted:#9aa0a6;
+      --accent:#FF3131; --accent2:#e60073; --card:#1a1a1a; --ring:rgba(255,49,49,.25);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+    .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
+    .head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .brand{font-size:20px;font-weight:800;letter-spacing:.4px}
+    .muted{color:var(--muted);font-size:13px}
+    .hero{
+      background:radial-gradient(1200px 400px at 20% -10%,rgba(255,49,49,.15),transparent),var(--bg2);
+      border:1px solid #222;border-radius:14px;padding:20px;
+      display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:center
+    }
+    .poster{width:100%;aspect-ratio:2/3;background:#222 url('https://images.unsplash.com/photo-1514511547117-f9c651b49320?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;border-radius:10px;border:1px solid #2a2a2a}
+    .hero h1{margin:0 0 6px 0;font-size:22px}
+    .badge{display:inline-flex;align-items:center;gap:6px;background:#103417;border:1px solid #1f6b2a;color:#9effb7;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:8px}
+    .hero p{margin:4px 0 12px 0;color:#d7d7d7}
+    .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:800;border:0;cursor:pointer}
+    .shelf{margin-top:28px}
+    .shelf h2{font-size:18px;margin:0 0 12px 4px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)} .hero{grid-template-columns:100px 1fr}}
+    @media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .card{position:relative;background:var(--card);border:1px solid #222;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s, box-shadow .2s}
+    .card:hover{transform:translateY(-3px);box-shadow:0 6px 24px var(--ring)}
+    .thumb{width:100%;aspect-ratio:16/10;background:#222 url('https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat}
+    .card-body{padding:12px}
+    .title{font-weight:800;margin:0 0 4px 0;font-size:15px}
+    .tagline{margin:0;color:#cfcfcf;font-size:13px;line-height:1.35;min-height:34px}
+    .pill{position:absolute;top:10px;left:10px;background:#000000b0;border:1px solid #333;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}
+    .pill.new{background:#1f0a13;border-color:#53112d;color:#ff7db5}
+    .pill.hot{background:#1a0b0b;border-color:#5d1919;color:#ff9a9a}
+    /* Modal PDF */
+    .pdf-modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      display: none; align-items: center; justify-content: center;
+      z-index: 9999; padding: 16px;
+    }
+    .pdf-modal.open { display: flex; }
+    .pdf-box {
+      position: relative; width: min(1100px, 100%); height: min(90vh, 100%);
+      background: #0f0f0f; border: 1px solid #2a2a2a; border-radius: 12px;
+      overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.6);
+    }
+    .pdf-iframe {
+      width: 100%; height: 100%; border: 0; background: #111;
+    }
+    .pdf-close {
+      position: absolute; top: 10px; right: 10px;
+      background: #242424; color: #fff; border: 1px solid #333;
+      border-radius: 8px; padding: 10px 12px; cursor: pointer; font-weight: 800;
+    }
+    @media (max-width: 640px){
+      .pdf-box { width: 100%; height: 100%; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="head">
+      <div class="brand">🎬 SUA ÁREA EXCLUSIVA</div>
+      <div class="muted">Todos os seus conteúdos e upgrades em um só lugar</div>
+    </div>
+
+    <!-- HERO: Produto principal -->
+    <section class="hero">
+      <div class="poster" style="background-image:url('/covers/mounjaro.jpg')"></div>
+      <div>
+        <div class="badge">✔️ Já adquirido</div>
+        <h1>Mounjaro de Pobre</h1>
+        <p>Protocolo acessível de emagrecimento para começar agora. Use esta área para desbloquear os upgrades que aceleram e protegem seus resultados.</p>
+        <a href="#" class="cta" id="open-mounjaro-pdf" data-pdf="/pdfs/mounjaro.pdf">🚀 Acessar Conteúdo (PDF)</a>
+      </div>
+    </section>
+
+    <!-- SHELF: Upsells -->
+    <section class="shelf">
+      <h2>Recomendados para você</h2>
+      <div class="grid">
+        <article class="card" data-modal="reset">
+          <div class="pill hot">Obrigatório</div>
+          <div class="thumb" style="background-image:url('/covers/reset-hormonal.jpg')"></div>
+          <div class="card-body">
+            <h3 class="title">Reset Hormonal</h3>
+            <p class="tagline">Sem isso, o rebote é certo. Proteja seu resultado.</p>
+          </div>
+        </article>
+        <article class="card" data-modal="celulite">
+          <div class="pill new">Novo</div>
+          <div class="thumb" style="background-image:url('/covers/adeus-celulite.jpg')"></div>
+          <div class="card-body">
+            <h3 class="title">Adeus Celulite</h3>
+            <p class="tagline">Pele lisa em 21 dias. Estética que levanta autoestima.</p>
+          </div>
+        </article>
+        <article class="card" data-modal="vip">
+          <div class="pill new">VIP</div>
+          <div class="thumb" style="background-image:url('/covers/grupo-vip.jpg')"></div>
+          <div class="card-body">
+            <h3 class="title">Grupo VIP da Nutri Sara</h3>
+            <p class="tagline">É como ter uma nutricionista no bolso – todos os dias.</p>
+          </div>
+        </article>
+        <article class="card" data-modal="articulacoes">
+          <div class="pill">Recomendado</div>
+          <div class="thumb" style="background-image:url('/covers/articulacoes.jpg')"></div>
+          <div class="card-body">
+            <h3 class="title">Alívio nas Articulações</h3>
+            <p class="tagline">Levante sem sofrer. Rotina simples de 5 minutos.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal PDF Fullscreen -->
+  <div class="pdf-modal" id="pdfModal" aria-hidden="true" role="dialog" aria-label="Visualizador de PDF">
+    <div class="pdf-box">
+      <button class="pdf-close" id="pdfClose" aria-label="Fechar PDF">✕ Fechar</button>
+      <iframe class="pdf-iframe" id="pdfFrame" src="" allow="autoplay"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Modal PDF
+    (function(){
+      const openBtn = document.getElementById('open-mounjaro-pdf');
+      const modal   = document.getElementById('pdfModal');
+      const frame   = document.getElementById('pdfFrame');
+      const closeBt = document.getElementById('pdfClose');
+
+      function openPdf(url){
+        frame.src = url;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closePdf(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        frame.src = ''; // limpa
+        document.body.style.overflow = '';
+      }
+
+      if(openBtn){
+        openBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          const url = this.getAttribute('data-pdf');
+          if(url){ openPdf(url); }
+          else { alert('PDF não encontrado.'); }
+        });
+      }
+      closeBt.addEventListener('click', closePdf);
+      modal.addEventListener('click', (e)=>{ if(e.target===modal) closePdf(); });
+      window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) closePdf(); });
+    })();
+  </script>
+</body>
+</html>
