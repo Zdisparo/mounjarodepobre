@@ -6,8 +6,13 @@
   <title>🎬 Área VIP – Seu Catálogo de Resultados</title>
   <style>
     :root{
-      --bg:#0b0b0b; --bg2:#141414; --text:#f1f1f1; --muted:#9aa0a6;
-      --accent:#FF3131; --accent2:#e60073; --card:#1a1a1a; --ring:rgba(255,49,49,.25);
+      /* Paleta ajustada para verde (Mounjaro vibe) */
+      --bg:#06130b; --bg2:#0c1f14; --text:#f1f1f1; --muted:#a7b3ab;
+      --accent:#00c853;        /* CTA principal verde */
+      --accent2:#00e5a8;       /* CTA secundário verde-água */
+      --card:#0f1a13;          /* Cards escuros esverdeados */
+      --ring:rgba(0,200,83,.25);
+      --accent-contrast:#0a301b;
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
@@ -15,52 +20,111 @@
     .head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
     .brand{font-size:20px;font-weight:800;letter-spacing:.4px}
     .muted{color:var(--muted);font-size:13px}
+
     .hero{
-      background:radial-gradient(1200px 400px at 20% -10%,rgba(255,49,49,.15),transparent),var(--bg2);
-      border:1px solid #222;border-radius:14px;padding:20px;
+      background:
+        radial-gradient(1200px 400px at 20% -10%, rgba(0,200,83,.18), transparent),
+        var(--bg2);
+      border:1px solid #193524;border-radius:14px;padding:20px;
       display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:center
     }
-    .poster{width:100%;aspect-ratio:2/3;background:#222 url('https://images.unsplash.com/photo-1514511547117-f9c651b49320?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;border-radius:10px;border:1px solid #2a2a2a}
+    .poster{width:100%;aspect-ratio:2/3;background:#12231a url('/mounjarom1.png') center/cover no-repeat;border-radius:10px;border:1px solid #1b3d29}
     .hero h1{margin:0 0 6px 0;font-size:22px}
-    .badge{display:inline-flex;align-items:center;gap:6px;background:#103417;border:1px solid #1f6b2a;color:#9effb7;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:8px}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      background:#0f2a1b;border:1px solid #1f6b2a;color:#9effb7;
+      padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:8px
+    }
     .hero p{margin:4px 0 12px 0;color:#d7d7d7}
-    .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:800;border:0;cursor:pointer}
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px}
+    .cta{
+      display:inline-flex;align-items:center;gap:8px;background:var(--accent);
+      color:#082013;text-decoration:none;padding:12px 16px;border-radius:8px;
+      font-weight:800;border:0;cursor:pointer;box-shadow:0 0 0 0 rgba(0,200,83,.3);
+      transition:transform .15s ease, box-shadow .3s ease
+    }
+    .cta:hover{transform:translateY(-1px); box-shadow:0 8px 24px var(--ring)}
+    .bonus-btn{background:#1f8e40; color:#eafff3}
+    .bonus-btn:hover{background:#22a349}
+    .support-btn{background:#128C7E; color:#eafff3} /* WhatsApp vibe */
+    .support-btn:hover{background:#0ea08f}
+
     .shelf{margin-top:28px}
     .shelf h2{font-size:18px;margin:0 0 12px 4px}
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     @media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)} .hero{grid-template-columns:100px 1fr}}
     @media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
-    .card{position:relative;background:var(--card);border:1px solid #222;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s, box-shadow .2s}
-    .card:hover{transform:translateY(-3px);box-shadow:0 6px 24px var(--ring)}
-    .thumb{width:100%;aspect-ratio:16/10;background:#222 url('https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat}
+
+    .card{
+      position:relative;background:var(--card);border:1px solid #173724;border-radius:12px;
+      overflow:hidden;cursor:pointer;transition:transform .2s, box-shadow .2s, filter .3s;
+      will-change:transform, box-shadow, filter;
+      /* Pulsar leve nos upsells */
+      animation:softPulse 2.8s ease-in-out infinite;
+    }
+    .card:hover{transform:translateY(-3px);box-shadow:0 6px 24px var(--ring); filter:brightness(1.05)}
+    @keyframes softPulse{
+      0%,100%{transform:translateY(0); box-shadow:0 0 0 rgba(0,0,0,0)}
+      50%{transform:translateY(-2px); box-shadow:0 8px 24px var(--ring)}
+    }
+
+    .thumb{width:100%;aspect-ratio:16/10;background:#112218 center/cover no-repeat}
+    .thumb.reset{background-image:url('/reset-hormonal.png')}
+    .thumb.celulite{background-image:url('/adeuscelulite.png')}
+    .thumb.vip{background-image:url('/nutrisara.png')}
+    .thumb.art{background-image:url('/articulações.png')}
+
     .card-body{padding:12px}
     .title{font-weight:800;margin:0 0 4px 0;font-size:15px}
-    .tagline{margin:0;color:#cfcfcf;font-size:13px;line-height:1.35;min-height:34px}
-    .pill{position:absolute;top:10px;left:10px;background:#000000b0;border:1px solid #333;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}
-    .pill.new{background:#1f0a13;border-color:#53112d;color:#ff7db5}
-    .pill.hot{background:#1a0b0b;border-color:#5d1919;color:#ff9a9a}
-    /* Modal PDF */
-    .pdf-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,.85);
-      display: none; align-items: center; justify-content: center;
-      z-index: 9999; padding: 16px;
+    .tagline{margin:0;color:#cfe3d6;font-size:13px;line-height:1.35;min-height:34px}
+    .pill{
+      position:absolute;top:10px;left:10px;background:#0a1a12b0;border:1px solid #1d4d33;
+      color:#b8ffcf;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800
     }
+    .pill.new{background:#0c1a16;border-color:#0f6a53;color:#7dffd8}
+    .pill.hot{background:#1a2a22;border-color:#2c7a55;color:#ffefb3}
+
+    /* Modal de Upsell */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:16px;z-index:1000}
+    .modal.open{display:flex}
+    .box{width:min(720px,100%);background:#0e1812;border:1px solid #1f3b2a;border-radius:14px;overflow:hidden;display:grid;grid-template-columns:240px 1fr}
+    @media(max-width:640px){.box{grid-template-columns:1fr}}
+    .box .left{background:#0a140e}
+    .box .left .cover{width:100%;height:100%;min-height:220px;background:#112218 center/cover no-repeat}
+    .box .right{padding:18px}
+    .x{position:absolute;top:14px;right:14px;background:#102018;border:1px solid #1b3d29;color:#dff6e9;border-radius:8px;padding:8px 10px;cursor:pointer}
+    .copy h3{margin:0 0 6px 0}
+    .copy p{margin:8px 0;color:#d2e6da}
+    .bullets{margin:10px 0 14px 18px;color:#cfe3d6}
+    .price{margin:8px 0 16px 0}
+    .price s{color:#8ca79a}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;background:var(--accent);border:0;color:#082013;
+      padding:12px 16px;border-radius:8px;font-weight:900;text-decoration:none
+    }
+
+    /* Modal PDF Fullscreen (Mounjaro) */
+    .pdf-modal {position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 16px;}
     .pdf-modal.open { display: flex; }
-    .pdf-box {
-      position: relative; width: min(1100px, 100%); height: min(90vh, 100%);
-      background: #0f0f0f; border: 1px solid #2a2a2a; border-radius: 12px;
-      overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.6);
+    .pdf-box { position: relative; width: min(1100px, 100%); height: min(90vh, 100%); background: #0a140e; border: 1px solid #1f3b2a; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.6);}
+    .pdf-iframe { width: 100%; height: 100%; border: 0; background: #0c1f14; }
+    .pdf-close { position: absolute; top: 10px; right: 10px; background: #102018; color: #e7fff1; border: 1px solid #1b3d29; border-radius: 8px; padding: 10px 12px; cursor: pointer; font-weight: 800;}
+    @media (max-width: 640px){ .pdf-box { width: 100%; height: 100%; border-radius: 0; } }
+
+    /* Popup de Parabéns (Onload) */
+    .welcome{
+      position:fixed; inset:0; background:rgba(0,0,0,.75); display:none; align-items:center; justify-content:center; z-index:10000; padding:16px;
     }
-    .pdf-iframe {
-      width: 100%; height: 100%; border: 0; background: #111;
+    .welcome.open{display:flex}
+    .welcome-box{
+      width:min(640px,100%); background:#0e1812; color:#eafff3; border:1px solid #1f3b2a; border-radius:14px;
+      padding:22px; box-shadow:0 10px 40px var(--ring); text-align:center
     }
-    .pdf-close {
-      position: absolute; top: 10px; right: 10px;
-      background: #242424; color: #fff; border: 1px solid #333;
-      border-radius: 8px; padding: 10px 12px; cursor: pointer; font-weight: 800;
-    }
-    @media (max-width: 640px){
-      .pdf-box { width: 100%; height: 100%; border-radius: 0; }
+    .welcome-box h3{margin:0 0 8px 0; font-size:22px}
+    .welcome-box p{margin:6px 0 16px 0; color:#cfe3d6}
+    .welcome-btn{
+      display:inline-flex;align-items:center;gap:8px;background:var(--accent); color:#082013;
+      border:0; padding:12px 18px; border-radius:10px; font-weight:900; cursor:pointer
     }
   </style>
 </head>
@@ -68,18 +132,22 @@
 
   <div class="wrap">
     <div class="head">
-      <div class="brand">🎬 SUA ÁREA EXCLUSIVA</div>
+      <div class="brand">🎬 SUA ÁREA EXCLUSIVA (Link da Área enviado por E-mail)</div>
       <div class="muted">Todos os seus conteúdos e upgrades em um só lugar</div>
     </div>
 
     <!-- HERO: Produto principal -->
     <section class="hero">
-      <div class="poster" style="background-image:url('/covers/mounjaro.jpg')"></div>
+      <div class="poster"></div>
       <div>
         <div class="badge">✔️ Já adquirido</div>
         <h1>Mounjaro de Pobre</h1>
         <p>Protocolo acessível de emagrecimento para começar agora. Use esta área para desbloquear os upgrades que aceleram e protegem seus resultados.</p>
-        <a href="#" class="cta" id="open-mounjaro-pdf" data-pdf="/mounjaro.pdf">🚀 Acessar Conteúdo (PDF)</a>
+        <div class="btn-row">
+          <a href="#" class="cta" id="open-mounjaro-pdf" data-pdf="/mounjaro.pdf">🚀 Acessar Conteúdo</a>
+          <a href="https://drive.google.com/drive/folders/1KKxhMZkgKxCUbVdNutDp7uofcKaOkv3p?usp=sharing" target="_blank" rel="noopener" class="cta bonus-btn">🎁 Bônus</a>
+          <a href="https://wa.me/5599999999999?text=Suporte%20-%20Mounjaro%20de%20Pobre" target="_blank" rel="noopener" class="cta support-btn">💬 Suporte WhatsApp</a>
+        </div>
       </div>
     </section>
 
@@ -87,33 +155,40 @@
     <section class="shelf">
       <h2>Recomendados para você</h2>
       <div class="grid">
+        <!-- Reset Hormonal -->
         <article class="card" data-modal="reset">
           <div class="pill hot">Obrigatório</div>
-          <div class="thumb" style="background-image:url('/covers/reset-hormonal.jpg')"></div>
+          <div class="thumb reset"></div>
           <div class="card-body">
             <h3 class="title">Reset Hormonal</h3>
             <p class="tagline">Sem isso, o rebote é certo. Proteja seu resultado.</p>
           </div>
         </article>
+
+        <!-- Adeus Celulite -->
         <article class="card" data-modal="celulite">
-          <div class="pill new">Novo</div>
-          <div class="thumb" style="background-image:url('/covers/adeus-celulite.jpg')"></div>
+          <div class="pill new">Obrigatório</div>
+          <div class="thumb celulite"></div>
           <div class="card-body">
             <h3 class="title">Adeus Celulite</h3>
             <p class="tagline">Pele lisa em 21 dias. Estética que levanta autoestima.</p>
           </div>
         </article>
+
+        <!-- VIP Sara -->
         <article class="card" data-modal="vip">
           <div class="pill new">VIP</div>
-          <div class="thumb" style="background-image:url('/covers/grupo-vip.jpg')"></div>
+          <div class="thumb vip"></div>
           <div class="card-body">
             <h3 class="title">Grupo VIP da Nutri Sara</h3>
             <p class="tagline">É como ter uma nutricionista no bolso – todos os dias.</p>
           </div>
         </article>
+
+        <!-- Articulações -->
         <article class="card" data-modal="articulacoes">
           <div class="pill">Recomendado</div>
-          <div class="thumb" style="background-image:url('/covers/articulacoes.jpg')"></div>
+          <div class="thumb art"></div>
           <div class="card-body">
             <h3 class="title">Alívio nas Articulações</h3>
             <p class="tagline">Levante sem sofrer. Rotina simples de 5 minutos.</p>
@@ -123,7 +198,125 @@
     </section>
   </div>
 
-  <!-- Modal PDF Fullscreen -->
+  
+  <!-- MODAIS DE UPSELL -->
+  <!-- Reset Hormonal -->
+  <div class="modal" id="modal-reset" aria-hidden="true">
+    <button class="x" data-close>✕</button>
+    <div class="box">
+      <div class="left">
+        <div class="cover" style="background-image:url('/reset-hormonal.png')"></div>
+      </div>
+      <div class="right">
+        <div class="copy">
+          <h3>Reset Hormonal</h3>
+          <p>Você vai secar… mas sem ajustar os hormônios, o rebote é questão de tempo. Ative o reset e mantenha o resultado.</p>
+          <ul class="bullets">
+            <li>✅ Evita o efeito sanfona</li>
+            <li>✅ Reprograma o corpo para queimar gordura</li>
+            <li>✅ Multiplica o efeito do protocolo principal</li>
+          </ul>
+          <div class="price">De <s>R$ 97,00</s> por <b style="color:var(--accent)">R$ 14,90</b> — só agora.</div>
+          <a class="btn" href="https://pay.cakto.com.br/8qfczu9_554648" target="_blank" rel="noopener">🔥 Adquirir Reset Hormonal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adeus Celulite -->
+  <div class="modal" id="modal-celulite" aria-hidden="true">
+    <button class="x" data-close>✕</button>
+    <div class="box">
+      <div class="left">
+        <div class="cover" style="background-image:url('/adeuscelulite.png')"></div>
+      </div>
+      <div class="right">
+        <div class="copy">
+          <h3>Adeus Celulite</h3>
+          <p>Pele lisa, firme e bonita em poucas semanas. O passo a passo que completa seu resultado no espelho.</p>
+          <ul class="bullets">
+            <li>✅ Rotina caseira de massagem</li>
+            <li>✅ Checklist anti-celulite (inflamação & retenção)</li>
+            <li>✅ Técnicas de 5 minutos em casa</li>
+          </ul>
+          <div class="price">De <s>R$ 67,00</s> por <b style="color:var(--accent2)">R$ 13,90</b> — exclusivo aqui.</div>
+          <a class="btn" style="background:var(--accent2)" href="https://pay.cakto.com.br/6oc24i9_529609" target="_blank" rel="noopener">💖 Adquirir Adeus Celulite</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grupo VIP -->
+  <div class="modal" id="modal-vip" aria-hidden="true">
+    <button class="x" data-close>✕</button>
+    <div class="box">
+      <div class="left">
+        <div class="cover" style="background-image:url('/nutrisara.png')"></div>
+      </div>
+      <div class="right">
+        <div class="copy">
+          <h3>Grupo VIP da Nutri Sara Fialho</h3>
+          <p>Protocolos semanais, dicas diretas da nutricionista e uma comunidade que puxa você pra frente.</p>
+          <ul class="bullets">
+            <li>✅ Protocolos secretos toda semana</li>
+            <li>✅ Acesso direto à Nutri (áudios e lives)</li>
+            <li>✅ Suporte e motivação diária</li>
+          </ul>
+          <div class="price">De <s>R$ 47,00</s> por <b style="color:var(--accent)">R$ 14,90</b> — só hoje.</div>
+          <a class="btn" href="https://pay.cakto.com.br/38xg7rj_562082" target="_blank" rel="noopener">👑 Entrar no Grupo VIP</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alívio nas Articulações -->
+  <div class="modal" id="modal-articulacoes" aria-hidden="true">
+    <button class="x" data-close>✕</button>
+    <div class="box">
+      <div class="left">
+        <div class="cover" style="background-image:url('/articulações.png')"></div>
+      </div>
+      <div class="right">
+        <div class="copy">
+          <h3>Guia Alívio nas Articulações</h3>
+          <p>Levante sem sofrer. Movimentos simples e truques naturais para reduzir dor e rigidez.</p>
+          <ul class="bullets">
+            <li>✅ 3 exercícios de 5 minutos</li>
+            <li>✅ Compressa morna & chá anti-inflamatório</li>
+            <li>✅ Checklist diário prático</li>
+          </ul>
+          <div class="price">De <s>R$ 29,90</s> por <b style="color:var(--accent)">R$ 9,90</b> — oferta relâmpago.</div>
+          <a class="btn" href="https://pay.cakto.com.br/3fhdqfn_558877" target="_blank" rel="noopener">💥 Adquirir Agora</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Alívio nas Articulações -->
+  <div class="modal" id="modal-articulacoes" aria-hidden="true">
+    <button class="x" data-close>✕</button>
+    <div class="box">
+      <div class="left">
+        <div class="cover" style="background-image:url('/articulações.png')"></div>
+      </div>
+      <div class="right">
+        <div class="copy">
+          <h3>Guia Alívio nas Articulações</h3>
+          <p>Levante sem sofrer. Movimentos simples e truques naturais para reduzir dor e rigidez.</p>
+          <ul class="bullets">
+            <li>✅ 3 exercícios de 5 minutos</li>
+            <li>✅ Compressa morna & chá anti-inflamatório</li>
+            <li>✅ Checklist diário prático</li>
+          </ul>
+          <div class="price">De <s>R$ 29,90</s> por <b style="color:var(--accent)">R$ 9,90</b> — oferta relâmpago.</div>
+          <a class="btn" href="https://pay.cakto.com.br/3fhdqfn_558877" target="_blank" rel="noopener">💥 Adquirir Agora</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal PDF Fullscreen (Mounjaro) -->
   <div class="pdf-modal" id="pdfModal" aria-hidden="true" role="dialog" aria-label="Visualizador de PDF">
     <div class="pdf-box">
       <button class="pdf-close" id="pdfClose" aria-label="Fechar PDF">✕ Fechar</button>
@@ -131,8 +324,34 @@
     </div>
   </div>
 
+  <!-- Popup de Parabéns ao carregar -->
+  <div class="welcome" id="welcome">
+    <div class="welcome-box">
+      <h3>🎉 Parabéns! Acesso liberado</h3>
+      <p>Enviamos o link desta <b>Área de Membros</b> também para o <b>e-mail cadastrado</b> na compra.  
+      Guarde esse e-mail para voltar sempre que quiser, inclusive para <b>adquirir novos conteúdos</b> no futuro.</p>
+      <button class="welcome-btn" id="welcomeClose">Entendi</button>
+    </div>
+  </div>
+
   <script>
-    // Modal PDF
+    // Abrir modal de upsell ao clicar nos cards
+    const map = { reset:'modal-reset', celulite:'modal-celulite', vip:'modal-vip', articulacoes:'modal-articulacoes' };
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('click', ()=>{
+        const id = map[card.dataset.modal];
+        if(id){ document.getElementById(id).classList.add('open'); }
+      });
+    });
+    // Fechar modais de upsell
+    document.querySelectorAll('.modal [data-close]').forEach(btn=>{
+      btn.addEventListener('click', ()=> btn.closest('.modal').classList.remove('open'));
+    });
+    document.querySelectorAll('.modal').forEach(m=>{
+      m.addEventListener('click', (e)=>{ if(e.target===m) m.classList.remove('open'); });
+    });
+
+    // Modal PDF (Mounjaro)
     (function(){
       const openBtn = document.getElementById('open-mounjaro-pdf');
       const modal   = document.getElementById('pdfModal');
@@ -156,13 +375,23 @@
         openBtn.addEventListener('click', function(e){
           e.preventDefault();
           const url = this.getAttribute('data-pdf');
-          if(url){ openPdf(url); }
-          else { alert('PDF não encontrado.'); }
+          if(url){ openPdf(url); } else { alert('PDF não encontrado.'); }
         });
       }
       closeBt.addEventListener('click', closePdf);
       modal.addEventListener('click', (e)=>{ if(e.target===modal) closePdf(); });
       window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) closePdf(); });
+    })();
+
+    // Popup de Parabéns onload
+    (function(){
+      const w = document.getElementById('welcome');
+      const c = document.getElementById('welcomeClose');
+      // Mostra sempre que carregar (se quiser mostrar uma vez só, salva em localStorage)
+      document.addEventListener('DOMContentLoaded', ()=>{ w.classList.add('open'); });
+      c.addEventListener('click', ()=> w.classList.remove('open'));
+      w.addEventListener('click', (e)=>{ if(e.target===w) w.classList.remove('open'); });
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && w.classList.contains('open')) w.classList.remove('open'); });
     })();
   </script>
 </body>
