@@ -727,9 +727,63 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+<script>
+(function () {
+  const BACK_URL = "https://pay.cakto.com.br/dp27vxm_553165";
+  let armed = true;
+  let navigating = false;
+
+  // Desarma nos CTAs
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest("a");
+    if (a && a.href) {
+      navigating = true;
+      armed = false;
+      setTimeout(() => { navigating = false; armed = true; }, 1500);
+    }
+  }, true);
+
+  // Trap do botão voltar
+  function trapHistory() {
+    try { history.pushState({}, "", location.href); } catch(e) {}
+  }
+  trapHistory();
+  setTimeout(trapHistory, 60);
+
+  window.addEventListener("popstate", function () {
+    if (armed) {
+      location.replace(BACK_URL);
+    } else {
+      setTimeout(trapHistory, 100);
+    }
+  });
+
+  // Fecha aba ou troca app (iOS/Android/PC)
+  window.addEventListener("pagehide", function () {
+    if (armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+
+  // Aba em background
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden" && armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+
+  // Volta de background (iOS específico)
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
+
 
 
 
