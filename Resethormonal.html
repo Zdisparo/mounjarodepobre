@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 <head>
 
-
 <script
   src="https://cdn.utmify.com.br/scripts/utms/latest.js"
   data-utmify-prevent-xcod-sck
@@ -20,151 +19,324 @@
   document.head.appendChild(a);
 </script>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 ATIVA O RESET HORMONAL AGORA!</title>
+<style>
+  :root{
+    --bg:#111;
+    --text:#fff;
+    --brand:#FF3131;
+    --brand-hover:#ff0000;
+    --card:#222;
+    --muted:#888;
+    --warning:#ffd60a;
+  }
 
- 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🔥 ATIVA O RESET HORMONAL AGORA!</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
-      text-align: center;
-      padding: 30px 15px;
-    }
+  /* Base */
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background-color:var(--bg);
+    color:var(--text);
+    text-align:center;
+    padding:30px 15px;
+  }
 
-    .hero {
-      max-width: 700px;
-      margin: auto;
-    }
+  /* Top sticky bar */
+  .topbar{
+    background-color:red;
+    color:white;
+    font-weight:bold;
+    text-align:center;
+    padding:12px;
+    font-size:16px;
+    position:sticky;
+    top:0;
+    z-index:999;
+  }
 
-    .headline {
-      font-size: 30px;
-      color: #FF3131;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
+  /* Layout */
+  .hero{max-width:700px;margin:auto}
+  .headline{
+    font-size:30px;
+    color:var(--brand);
+    font-weight:bold;
+    margin-bottom:20px;
+  }
+  .subheadline{
+    font-size:22px;
+    margin-bottom:30px;
+    line-height:1.35;
+  }
+  .image{
+    width:100%;
+    max-width:400px;
+    margin:20px auto;
+    display:block;
+  }
+  .benefits{
+    text-align:left;
+    max-width:700px;
+    margin:30px auto;
+    font-size:18px;
+    line-height:1.6;
+    padding-left:18px;
+  }
+  .benefits li{ margin-bottom:10px }
 
-    .subheadline {
-      font-size: 22px;
-      margin-bottom: 30px;
-    }
+  .price{font-size:20px;margin-top:20px}
+  .price s{color:#aaa}
 
-    .image {
-      width: 100%;
-      max-width: 400px;
-      margin: 20px auto;
-      display: block;
-    }
+  .timer{
+    font-size:18px;
+    margin-top:10px;
+    color:var(--warning);
+  }
 
-    .benefits {
-      text-align: left;
-      max-width: 700px;
-      margin: 30px auto;
-      font-size: 18px;
-      line-height: 1.6;
-    }
+  .cta-btn{
+    background-color:var(--brand);
+    color:white;
+    padding:20px 30px;
+    border:none;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:8px;
+    margin-top:30px;
+    display:inline-block;
+    transition:.3s;
+    text-decoration:none;
+  }
+  .cta-btn:hover{ background-color:var(--brand-hover); transform:scale(1.05) }
 
-    .benefits li {
-      margin-bottom: 10px;
-    }
+  .testimonial{
+    background-color:var(--card);
+    padding:20px;
+    border-radius:10px;
+    margin-top:30px;
+  }
+  .testimonial img{
+    border-radius:50%;
+    width:80px;
+    margin-bottom:10px;
+  }
 
-    .cta-btn {
-      background-color: #FF3131;
-      color: white;
-      padding: 20px 30px;
-      border: none;
-      font-size: 22px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 8px;
-      margin-top: 30px;
-      display: inline-block;
-      transition: 0.3s;
-    }
+  .exit-link{
+    margin-top:30px;
+    display:block;
+    font-size:14px;
+    color:var(--muted);
+    text-decoration:underline;
+  }
 
-    .cta-btn:hover {
-      background-color: #ff0000;
-      transform: scale(1.05);
-    }
+  /* ===== Popup de Obrigado ===== */
+  .modal-backdrop{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center; justify-content:center;
+    z-index:2000; /* acima da topbar */
+  }
+  .modal{
+    width:min(94vw,520px);
+    background:#1b1b1b;
+    color:#fff;
+    border:1px solid #2a2a2a;
+    border-radius:14px;
+    padding:22px 18px;
+    box-shadow:0 10px 40px rgba(0,0,0,.5);
+    text-align:left;
+  }
+  .modal h3{
+    margin:0 0 10px;
+    font-size:22px;
+  }
+  .modal p{ margin:0 0 14px; line-height:1.5 }
+  .modal .ok-btn{
+    display:inline-block;
+    margin-top:6px;
+    background:#10b981;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:12px 18px;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+  }
+  .modal .ok-btn:hover{ filter:brightness(1.05) }
 
-    .price {
-      font-size: 20px;
-      margin-top: 20px;
-    }
-
-    .price s {
-      color: #aaa;
-    }
-
-    .timer {
-      font-size: 18px;
-      margin-top: 10px;
-      color: yellow;
-    }
-
-    .testimonial {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 30px;
-    }
-
-    .testimonial img {
-      border-radius: 50%;
-      width: 80px;
-      margin-bottom: 10px;
-    }
-
-    .exit-link {
-      margin-top: 30px;
-      display: block;
-      font-size: 14px;
-      color: #888;
-      text-decoration: underline;
-    }
-  </style>
+  /* Confetti canvas */
+  #confetti-canvas{
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:1500; /* abaixo do modal, acima do resto */
+    display:none;
+  }
+</style>
 </head>
 <body>
 
-  <div style="background-color: red; color: white; font-weight: bold; text-align: center; padding: 12px; font-size: 16px; position: sticky; top: 0; z-index: 999;">
-  ⚠️ NÃO FECHE ESSA PÁGINA OU PODE HAVER ERROS NA SUA COMPRA ⚠️
-</div>
+<div class="topbar">⚠️ NÃO FECHE ESSA PÁGINA OU PODE HAVER ERROS NA SUA COMPRA ⚠️</div>
 
-  <div class="hero">
-    <div class="headline">⚠️ VOCÊ VAI SECAR COM O MOUNJARO DE POBRE... MAS SEM O RESET HORMONAL, O REBOTE É CERTO!</div>
-    
-<div class="subheadline">
-  🎉 Parabéns pela compra! Seu acesso foi enviado para o seu e-mail. <br>
-  Caso não consiga acessar pelo e-mail, fale com nosso suporte clicando aqui: 
-  <a href="https://wa.me/557398629858" target="_blank">WhatsApp Suporte</a> <br><br>
-  O Reset Hormonal é o que impede teu corpo de sabotar os resultados e voltar a acumular gordura. Ajusta teus hormônios agora e garante que o emagrecimento NÃO VAI EMBORA!
-</div>
-    
-    <img src="/imgh.png" alt="Imagem Hormonal" class="image">
+<div class="hero">
+  <!-- COPY mais agressiva -->
+  <div class="headline">⚠️ VOCÊ VAI EMAGRECER… MAS SEM O RESET HORMONAL O REBOTE É QUASE CERTO.</div>
 
-    <ul class="benefits">
-      <li>✅ Evita o efeito rebote e garante que o peso perdido não volte</li>
-      <li>✅ Reprograma teus hormônios para manter o corpo queimando gordura</li>
-      <li>✅ Multiplica os resultados do Mounjaro de Pobre de forma permanente</li>
-      <li>✅ Acaba com compulsão e ansiedade que fazem engordar de novo</li>
-    </ul>
-
-    <div class="price">De <s>R$ 97,00</s> por <strong>R$ 14,90</strong> — Só HOJE</div>
-    <div class="timer">⏰ Oferta expira em menos de 10 minutos!</div>
-
-    <a href="https://pay.cakto.com.br/8qfczu9_554648" class="cta-btn">💣 NÃO QUERO ENGORDAR DE NOVO — QUERO O RESET AGORA!</a>
-
-    <div class="testimonial">
-      <img src="/dp.jpg" alt="Usuário">
-      <p><strong>Patrícia S. (SP)</strong><br>
-      "Eu já tinha emagrecido antes e engordei tudo de novo... dessa vez com o Reset Hormonal eu finalmente consegui manter o peso! Valeu cada centavo."</p>
-    </div>
-
-    <a href="https://mounjarodepobre.onrender.com/Adeuscelulite" class="exit-link">Não, eu prefiro arriscar engordar tudo de novo...</a>
+  <div class="subheadline">
+    Parabéns pela compra! <strong>Seu acesso foi enviado para o e-mail cadastrado.</strong><br><br>
+    Agora, seja sincera: de que adianta perder peso <em>hoje</em> se os seus hormônios vão te puxar de volta <em>amanhã</em>?<br>
+    O <strong>Reset Hormonal</strong> impede que seu corpo sabote o resultado — sem ele, o risco de engordar de novo dispara.
   </div>
+
+  <img src="/imgh.png" alt="Imagem Hormonal" class="image">
+
+  <ul class="benefits">
+    <li>✅ <strong>Bloqueia o efeito rebote</strong> — sem Reset, o corpo volta a acumular gordura.</li>
+    <li>✅ <strong>Reprograma seus hormônios</strong> para manter a queima ativa após o emagrecimento.</li>
+    <li>✅ <strong>Multiplica e sustenta</strong> os resultados do Mounjaro de Pobre.</li>
+    <li>✅ <strong>Reduz compulsão e ansiedade</strong> que detonam a dieta e trazem o peso de volta.</li>
+  </ul>
+
+  <div class="price">De <s>R$ 97,00</s> por <strong>R$ 14,90</strong> — Só HOJE</div>
+  <div class="timer">⏰ Oferta expira em menos de 10 minutos!</div>
+
+  <a href="https://pay.cakto.com.br/8qfczu9_554648" class="cta-btn">💣 NÃO QUERO REBOTE — ATIVAR RESET HORMONAL AGORA</a>
+
+  <div class="testimonial">
+    <img src="/dp.jpg" alt="Usuário">
+    <p><strong>Patrícia S. (SP)</strong><br>
+      "Eu já tinha emagrecido antes e engordei tudo de novo… com o Reset Hormonal eu finalmente <strong>parei de voltar</strong>. Valeu cada centavo."
+    </p>
+  </div>
+
+  <a href="https://mounjarodepobre.onrender.com/Adeuscelulite" class="exit-link">Não, eu prefiro arriscar engordar tudo de novo…</a>
+</div>
+
+<!-- ===== Confetti Canvas ===== -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ===== Modal de Obrigado ===== -->
+<div class="modal-backdrop" id="thanks-backdrop" role="dialog" aria-modal="true" aria-labelledby="thanks-title">
+  <div class="modal">
+    <h3 id="thanks-title">🎉 Compra confirmada!</h3>
+    <p>Enviamos <strong>todos os conteúdos</strong> para o <strong>e-mail cadastrado</strong> na sua compra.</p>
+    <p>Se não encontrar agora, verifique a caixa de spam ou “Promoções”.</p>
+    <button class="ok-btn" id="thanks-ok" aria-label="Fechar aviso">OK, entendi</button>
+  </div>
+</div>
+
+<script>
+  // ===== Confetti simples (3s) =====
+  (function(){
+    var canvas = document.getElementById('confetti-canvas');
+    var ctx = canvas.getContext('2d');
+    var W, H, particles = [], startTime, animId;
+
+    function resize(){
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function rand(min,max){ return Math.random()*(max-min)+min }
+
+    function createParticles(n){
+      particles.length = 0;
+      for (var i=0;i<n;i++){
+        particles.push({
+          x: rand(0, W),
+          y: rand(-H*0.2, 0),
+          r: rand(3,6),
+          vx: rand(-1,1),
+          vy: rand(2,5),
+          rot: rand(0, Math.PI*2),
+          vr: rand(-0.2,0.2),
+          // cores variadas (sem libs)
+          color: ['#FF3131','#FFD60A','#4ADE80','#60A5FA','#F472B6'][Math.floor(rand(0,5))]
+        });
+      }
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(function(p){
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        if (p.y > H+10) { p.y = -10; p.x = rand(0,W) }
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.r, -p.r, p.r*2, p.r*2);
+        ctx.restore();
+      });
+    }
+
+    function loop(ts){
+      if(!startTime) startTime = ts;
+      var elapsed = ts - startTime;
+      draw();
+      if (elapsed < 3000) { // 3s
+        animId = requestAnimationFrame(loop);
+      } else {
+        stopConfetti();
+      }
+    }
+
+    function startConfetti(){
+      resize();
+      window.addEventListener('resize', resize);
+      canvas.style.display = 'block';
+      createParticles(160);
+      startTime = null;
+      animId = requestAnimationFrame(loop);
+    }
+
+    function stopConfetti(){
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+      canvas.style.display = 'none';
+    }
+
+    // Expor controladores no escopo local do script:
+    window.__startConfetti = startConfetti;
+    window.__stopConfetti = stopConfetti;
+  })();
+
+  // ===== Modal de obrigado (abre ao carregar) =====
+  (function(){
+    var backdrop = document.getElementById('thanks-backdrop');
+    var ok = document.getElementById('thanks-ok');
+
+    function openModal(){
+      backdrop.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      // dispara confete por 3 segundos
+      if (window.__startConfetti) window.__startConfetti();
+    }
+
+    function closeModal(){
+      backdrop.style.display = 'none';
+      document.body.style.overflow = '';
+      if (window.__stopConfetti) window.__stopConfetti();
+    }
+
+    ok.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', function(e){
+      // fecha ao clicar fora da caixa
+      if (e.target === backdrop) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && backdrop.style.display === 'flex') closeModal();
+    });
+
+    // Abre assim que a página carregar
+    window.addEventListener('load', openModal);
+  })();
+</script>
 
 </body>
 </html>
