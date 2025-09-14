@@ -274,10 +274,6 @@
     document.head.appendChild(s);
 </script>
 
-
-
-
-
 <!-- Placeholder para manter espaço -->
 <div id="placeholder" style="height: 60px;"></div>
 
@@ -285,20 +281,14 @@
   <a href="https://quiz.cakto.com.br/preview/monjauro-JmSfgY" id="ctaBtn" class="cta">
     QUERO A RECEITA DO MOUNJARO DE POBRE!
   </a>
-  
-  
-
-
 
 <!-- Sessão de Imagens -->
   <div class="image-section">
-    <img src="footer.png" alt="Imagem 1" class="centered-img">
-          
-</div>
+    <img src="footer.png" alt="Imagem 1" class="centered-img">   
+  </div>
 
 <!-- Placeholder para manter espaço -->
 <div id="placeholder" style="height: 60px;"></div>
-
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -312,13 +302,12 @@ document.addEventListener("DOMContentLoaded", function() {
   // Esconde o botão inicialmente
   elementsToHide.forEach(item => item.el.style.display = "none");
 
-  // Mostra o botão após 5min55s (355000 ms)
+  // Mostra o botão após 6min15s (375000 ms)
   setTimeout(function() {
     elementsToHide.forEach(item => item.el.style.display = item.originalDisplay);
   }, 375000);
 });
 </script>
-
 
 <script>
   const ctaBtn = document.getElementById('ctaBtn');
@@ -333,9 +322,16 @@ document.addEventListener("DOMContentLoaded", function() {
   observer.observe(ctaBtn, { attributes: true, attributeFilter: ['style'] });
 </script>
 
+<!-- BACKREDIRECT -->
+<script>
+  var backRedirectUrl = "https://pay.cakto.com.br/dp27vxm_553165"; // TROQUE para sua página de oferta
+  (function() {
+    history.pushState(null, null, location.href);
+    window.onpopstate = function() {
+      location.href = backRedirectUrl;
+    };
+  })();
+</script>
 
 </body>
 </html>
-
-
-
