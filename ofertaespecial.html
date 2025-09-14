@@ -100,24 +100,43 @@
     A oportunidade está na sua frente — e se você deixar passar, vai se arrepender depois.
   </div>
 
-  <vturb-smartplayer
-  id="vid-68be2c0dc820ef16d50a2121"
-  style="display:block; margin:0 auto; width:100%; max-width:400px;">
-</vturb-smartplayer>
+  <!-- === ÁUDIO: "Escute esse áudio" (estilo WhatsApp) === -->
+  <div class="audio-wrap" style="max-width:400px;margin:18px auto 10px;text-align:left;">
+    <p style="font-weight:700;margin:0 0 8px;">Escute o áudio da Dra. Sara Fialho</p>
 
-<script type="text/javascript">
-  (function () {
-    var s = document.createElement("script");
-    s.src = "https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/68be2c0dc820ef16d50a2121/v4/player.js";
-    s.async = true;
-    document.head.appendChild(s);
-  })();
-</script>
+    <div class="audio-card" id="wa-audio"
+         style="display:flex;align-items:center;gap:12px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:14px;padding:12px;">
+      <img src="/profile.png" alt="Foto de perfil" width="44" height="44"
+           style="border-radius:999px;object-fit:cover;flex:0 0 44px;">
+
+      <button type="button" id="wa-play"
+              aria-label="Tocar áudio"
+              style="border:none;background:#10b981;color:#fff;width:44px;height:44px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 0 #0a7c5a;cursor:pointer;">
+        <span id="wa-icon" style="font-weight:900;font-size:18px;line-height:1;transform:translateX(1px);">►</span>
+      </button>
+
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+        <input type="range" id="wa-seek" min="0" value="0" step="0.01" style="width:100%;accent-color:#10b981;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;">
+          <span id="wa-current">0:00</span>
+          <span id="wa-duration">0:00</span>
+        </div>
+      </div>
+
+      <!-- Áudio real -->
+      <audio id="wa-audio-el" preload="auto" playsinline>
+        <source src="/audio2.mp3" type="audio/mpeg">
+        <source src="/audio.ogg" type="audio/ogg">
+        Seu navegador não suporta áudio HTML5.
+      </audio>
+    </div>
+  </div>
+  <!-- (removido um </script> solto que estava aqui) -->
 
   <div class="product-box">
     <h1>Mounjaro de Pobre</h1>
     <p>O protocolo acessível que já transformou a vida de mulheres comuns, que decidiram parar de esperar pelo “momento certo”.</p>
-    <div class="price">De <s>R$ 97,90</s> por apenas <strong style="color:#d62828">R$ 6x 5,77</strong> ou 19,90 avista!</div>
+    <div class="price">De <s>R$ 97,90</s> por apenas <strong style="color:#d62828">R$ 4x 5,77</strong> ou 19,90 avista!</div>
     <a href="https://pay.cakto.com.br/dp27vxm_553165" class="cta-btn">🔥 Emagrecer Agora por Menos que uma Pizza!</a>
 
     <div class="bonus-section">
@@ -133,47 +152,27 @@
 
   <!-- Resultados (imagens + vídeos) -->
   <section class="testimonials">
-  <h2>✨ Resultados de quem confiou no poder do Mounjaro</h2>
-  <div class="media-grid">
-    <!-- Imagem 1 -->
-    <img src="img61.png" alt="Resultado com Mounjaro" class="media">
-    <!-- Imagem 2 -->
-    <img src="img51.png" alt="Resultado com Mounjaro" class="media">
-    <!-- Vídeo 1 -->
-    <video controls class="media">
-      <source src="video1.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
-    </video>
-    <!-- Vídeo 2 -->
-    <video controls class="media">
-      <source src="video3.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
-    </video>
-  </div>
-</section>
+    <h2>✨ Resultados de quem confiou no poder do Mounjaro</h2>
+    <div class="media-grid">
+      <img src="img61.png" alt="Resultado com Mounjaro" class="media">
+      <img src="img51.png" alt="Resultado com Mounjaro" class="media">
+      <video controls class="media">
+        <source src="video1.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+      <video controls class="media">
+        <source src="video3.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+    </div>
+  </section>
 
-<style>
-.testimonials {
-  margin: 50px auto;
-  text-align: center;
-  max-width: 900px;
-}
-.testimonials h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-.media-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
-.media {
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-</style>
-
+  <style>
+    .testimonials { margin: 50px auto; text-align: center; max-width: 900px; }
+    .testimonials h2 { font-size: 24px; margin-bottom: 20px; }
+    .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .media { width: 100%; border-radius: 10px; border: 1px solid #ddd; }
+  </style>
 
   <!-- Depoimentos -->
   <section class="testimonials">
@@ -220,6 +219,58 @@
   <!-- CTA final -->
   <p style="margin:26px 0 8px;color:#333">Se você quer resultado, a hora é agora.</p>
   <a href="https://pay.cakto.com.br/dp27vxm_553165" class="cta-btn">🔥 Garantir o Mounjaro por menos de R$ 0,60 dia </a>
+
+  <!-- ===== JS do áudio (play/pause, tempo e seek) ===== -->
+  <script>
+    (function() {
+      var audio = document.getElementById('wa-audio-el');
+      var btn = document.getElementById('wa-play');
+      var icon = document.getElementById('wa-icon');
+      var seek = document.getElementById('wa-seek');
+      var cur = document.getElementById('wa-current');
+      var dur = document.getElementById('wa-duration');
+
+      if (!audio || !btn || !seek || !cur || !dur || !icon) return;
+
+      function fmtTime(s) {
+        if (!isFinite(s)) return '0:00';
+        var m = Math.floor(s / 60);
+        var ss = Math.floor(s % 60).toString().padStart(2, '0');
+        return m + ':' + ss;
+      }
+
+      audio.addEventListener('loadedmetadata', function() {
+        seek.max = audio.duration || 0;
+        dur.textContent = fmtTime(audio.duration);
+      });
+
+      btn.addEventListener('click', function() {
+        if (audio.paused) {
+          audio.play().then(function() {
+            icon.textContent = '❚❚';
+          }).catch(function(){ /* bloqueios de autoplay não afetam pois há gesto */ });
+        } else {
+          audio.pause();
+          icon.textContent = '►';
+        }
+      });
+
+      audio.addEventListener('timeupdate', function() {
+        seek.value = audio.currentTime || 0;
+        cur.textContent = fmtTime(audio.currentTime);
+      });
+
+      seek.addEventListener('input', function() {
+        audio.currentTime = Number(seek.value || 0);
+      });
+
+      audio.addEventListener('ended', function() {
+        icon.textContent = '►';
+        seek.value = 0;
+        cur.textContent = '0:00';
+      });
+    })();
+  </script>
 
 </body>
 </html>
