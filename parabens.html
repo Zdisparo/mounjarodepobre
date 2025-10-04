@@ -51,6 +51,12 @@
        text-decoration:none;box-shadow:0 10px 24px rgba(34,197,94,.28);transition:transform .08s ease, filter .15s ease}
   .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
+  /* PREÇO (revela junto com CTA) */
+  #price{display:none;text-align:center;margin:10px auto 0;font-weight:800}
+  #price .old{color:var(--muted);text-decoration:line-through;margin-right:8px}
+  #price .sep{margin:0 6px;color:var(--muted)}
+  #price .now{color:var(--primary);font-size:clamp(1.05rem,2.6vw,1.4rem)}
+
   /* Depoimentos */
   #testimonials{display:none;max-width:1000px;margin:22px auto 0;padding:0 8px}
   #testimonials h2{font-size:clamp(1.15rem,2.8vw,1.5rem);text-align:center;margin:8px 0 14px}
@@ -108,6 +114,13 @@
       </a>
     </div>
 
+    <!-- PREÇO (só aparece junto com o CTA) -->
+    <div id="price" aria-live="polite">
+      <span class="old">De R$ 67,90</span>
+      <span class="sep">→</span>
+      <span class="now">Por apenas R$ 14,90</span>
+    </div>
+
     <!-- Depoimentos (só aparecem junto com o CTA) -->
     <section id="testimonials" aria-labelledby="tit-deps">
       <h2 id="tit-deps">O que nossos alunos dizem</h2>
@@ -120,7 +133,7 @@
           </div>
         </article>
         <article class="depo">
-          <img src="dp0.jpg" alt="Foto de perfil do Carla P.">
+          <img src="dp0.jpg" alt="Foto de perfil do Carlos P.">
           <div class="info">
             <div class="name">Carlos P.</div>
             <div class="text">“Confesso que estava desconfiado, mas foi a virada de chave. Com o protocolo, senti mais energia e comecei a perder peso logo nos primeiros dias. Valeu cada centavo.”</div>
@@ -141,19 +154,20 @@
   </div>
 
 <script>
-  // Mostra CTA e depoimentos após 1min30s (90.000 ms)
+  // Mostra CTA, PREÇO e DEPOIMENTOS após 1min30s (90.000 ms)
   (function(){
     var delayMs = 90000; // 90s
     function reveal(){
       var cta = document.getElementById('cta');
       var deps = document.getElementById('testimonials');
+      var price = document.getElementById('price');
       if(cta) cta.style.display = 'block';
+      if(price) price.style.display = 'block';
       if(deps) deps.style.display = 'block';
       // rolar suavemente até o CTA ao surgir
       cta && cta.scrollIntoView({behavior:'smooth', block:'center'});
     }
-    // Se quiser atrelar ao play do vídeo, pode escutar eventos do player (quando disponível).
-    // Aqui usamos apenas o delay de tempo em tela:
+    // Apenas delay em tela (mantendo o que já funciona)
     setTimeout(reveal, delayMs);
   })();
 
